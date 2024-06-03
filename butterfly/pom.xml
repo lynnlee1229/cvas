@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+<!--    <parent>-->
+<!--        <groupId>cn.edu.whu.lynn</groupId>-->
+<!--        <artifactId>MyCrapCode</artifactId>-->
+<!--        <version>1.0-SNAPSHOT</version>-->
+<!--    </parent>-->
+    <parent>
+        <artifactId>cvas</artifactId>
+        <groupId>cn.edu.whu.lynn</groupId>
+        <version>lynn-0.1.0</version>
+    </parent>
+
+    <artifactId>butterfly</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <scala.version>2.12.10</scala.version>
+        <scala.compat.version>2.12</scala.compat.version>
+        <spark.version>3.0.0</spark.version>
+        <geotools.version>24.0</geotools.version>
+        <spatial4j.version>0.8</spatial4j.version>
+        <jts.version>1.19.0</jts.version>
+        <kryo.version>5.3.0</kryo.version>
+        <mysql.version>5.1.27</mysql.version>
+        <hive.version>1.2.1</hive.version>
+        <jackson.version>2.10.1</jackson.version>
+        <durid.version>1.1.10</durid.version>
+        <sedona.version>1.5.0</sedona.version>
+<!--        <beast.version>0.10.0</beast.version>-->
+        <!--        <beast.version>lynn-dev.0.10.0</beast.version>-->
+        <checkstyle.version>3.1.1</checkstyle.version>
+        <fastjson-version>2.0.23</fastjson-version>
+        <javafx.version>19.0.2.1</javafx.version>
+        <checkstyle.config>config/checkstyle.xml</checkstyle.config>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun Repository</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>osgeo</id>
+            <name>OSGeo Release Repository</name>
+            <url>https://repo.osgeo.org/repository/release/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!--    scala test-->
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_${scala.compat.version}</artifactId>
+            <version>3.0.5</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-reflect</artifactId>
+            <version>${scala.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.edu.whu.lynn</groupId>
+            <artifactId>commontest</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--        spark dependencies-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_${scala.compat.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-yarn_${scala.compat.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_${scala.compat.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive_${scala.compat.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.hive</groupId>-->
+        <!--            <artifactId>hive-exec</artifactId>-->
+        <!--            <version>${hive.version}</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_${scala.compat.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming-kafka-0-10_${scala.compat.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.fastjson2</groupId>-->
+<!--            <artifactId>fastjson2</artifactId>-->
+<!--            <version>${fastjson-version}</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${durid.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version> <!-- 请根据你的JavaFX版本调整版本号 -->
+        </dependency>
+
+        <!-- Geographical things dependencies -->
+        <dependency>
+            <groupId>org.locationtech.jts</groupId>
+            <artifactId>jts-core</artifactId>
+            <version>${jts.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.locationtech.spatial4j</groupId>
+            <artifactId>spatial4j</artifactId>
+            <version>${spatial4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.davidmoten</groupId>
+            <artifactId>rtree</artifactId>
+            <version>0.11</version>
+        </dependency>
+        <!--The following GeoTools dependencies use GNU Lesser General Public License and thus are excluded from the binary distribution-->
+        <!-- Users have to include them by themselves manually -->
+        <!-- See https://www.apache.org/legal/resolved.html#category-x -->
+        <!-- See https://github.com/geotools/geotools#license -->
+        <!--for CRS transformation-->
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-main</artifactId>
+            <version>${geotools.version}</version>
+            <!--            <scope>${dependency.scope}</scope>-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.locationtech.jts</groupId>
+                    <artifactId>jts-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--for CRS transformation-->
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-referencing</artifactId>
+            <version>${geotools.version}</version>
+            <!--            <scope>${dependency.scope}</scope>-->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--for CRS transformation-->
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-hsql</artifactId>
+            <version>${geotools.version}</version>
+            <!--            <scope>${dependency.scope}</scope>-->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo</artifactId>
+            <version>${kryo.version}</version>
+        </dependency>
+
+        <!--    以下是论文测试相关-->
+        <!-- https://mvnrepository.com/artifact/edu.ucr.cs.bdlab/beast -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--        sedona-->
+        <dependency>
+            <groupId>org.apache.sedona</groupId>
+            <artifactId>sedona-spark-shaded-3.0_2.12</artifactId>
+            <version>${sedona.version}</version>
+        </dependency>
+        <!-- Optional: https://mvnrepository.com/artifact/org.datasyslab/geotools-wrapper -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.datasyslab</groupId>-->
+        <!--            <artifactId>geotools-wrapper</artifactId>-->
+        <!--            <version>1.5.0-28.2</version>-->
+        <!--        </dependency>-->
+        <!--        jmh below java 12-->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>1.23</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>1.23</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.ucr.cs.bdlab</groupId>
+            <artifactId>core</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.edu.whu.lynn</groupId>
+            <artifactId>io</artifactId>
+            <version>lynn-0.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.edu.whu.lynn</groupId>
+            <artifactId>visualization</artifactId>
+            <version>lynn-0.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.edu.whu.lynn</groupId>
+            <artifactId>cvas-spark</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <transformers>
+                                <!-- Merge configuration files from all modules -->
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
+                                    <resource>cvas.xml</resource>
+                                </transformer>
+                                <!-- To make sure the extended geomesa datastore such as HBaseDataStoreFactory included
+                                     in the jar file
+                                 -->
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                            </transformers>
+                            <artifactSet>
+                                <excludes>
+                                    <!--                                    <exclude>org.apache.flink:*</exclude>-->
+                                    <!--                                    <exclude>org.geotools:*</exclude>-->
+                                </excludes>
+                            </artifactSet>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

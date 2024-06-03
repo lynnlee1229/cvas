@@ -1,0 +1,32 @@
+{
+  "master": "local[*]",
+  "appName": "GenBuffer",
+  "outFatherPath": "hdfs://localhost:9000",
+  "outPath": "/butterfly/testout",
+  "rdds": [
+    {
+      "readerType": "genPolygon",
+      "distribution": "uniform",
+      "cardinality": 10000,
+      "numPartitions": 8,
+      "opts": {
+        "seed": 1229
+      },
+      "maxSize": 0.1,
+      "numSegments": 100
+    }
+  ],
+  "algParam": {
+    "algType": "bufferv1",
+    "opts": {
+      "bufferdis": 0.1,
+      "bufferunit": "degree",
+      "bufferdissolve": false,
+      "sjworkload": "32m",
+      "pbsmpartitioner": "grid",
+      "quadsplitthreshold": 1000,
+      "quadsplitmethod": "index",
+      "filtermethod": "planesweep"
+    }
+  }
+}

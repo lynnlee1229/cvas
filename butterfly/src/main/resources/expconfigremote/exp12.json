@@ -1,0 +1,42 @@
+{
+  "master": "yarn",
+  "appName": "TDriveExp",
+  "parallelism": 64,
+  "inFatherPath": "hdfs://u0:9000",
+  "outFatherPath": "hdfs://u0:9000",
+  "outPath": "/butterfly/testout",
+  "rdds": [
+    {
+      "readerType": "csvpoint",
+      "relativePath": "/butterfly/testin/tdrive_withoutTime_500w.csv",
+      "xColumn": 1,
+      "yColumn": 2,
+      "delimiter": ",",
+      "skipHeader": false
+    }
+  ],
+  "joinParam": {
+    "joinType": "selfjoindissolve",
+    "opts": {
+      "sjworkload": "32m",
+      "pbsmpartitioner": "grid",
+      "filtermethod": "rtree"
+    },
+    "predicate": "Intersects"
+  },
+  "algParam": {
+    "algType": "bufferv1",
+    "opts": {
+      "bufferdis": 1e-9,
+      "bufferunit": "degree",
+      "bufferdissolve": true,
+      "sjworkload": "32m",
+      "pbsmpartitioner": "grid"
+    }
+  },
+  "partitionParam": {
+    "partitionType": "grid",
+    "opts": {
+    }
+  }
+}

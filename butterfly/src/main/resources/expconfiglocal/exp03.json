@@ -1,0 +1,61 @@
+{
+  "master": "local[*]",
+  "appName": "partitionExp",
+  "parallelism": 64,
+  "outFatherPath": "hdfs://localhost:9000",
+  "outPath": "/butterfly/testout",
+  "joinPairType": "Point-Polygon",
+  "rdds": [
+    {
+      "readerType": "genPoint",
+      "distribution": "uniform",
+      "cardinality": 10000,
+      "opts": {
+        "seed": 1229
+      }
+    },
+    {
+      "readerType": "genPolygon",
+      "distribution": "uniform",
+      "cardinality": 10000,
+      "opts": {
+        "seed": 1229
+      },
+      "maxSize": 0.1,
+      "numSegments": 10
+    }
+  ],
+  "rdds_bak": [
+    {
+      "readerType": "genPolygon",
+      "distribution": "uniform",
+      "cardinality": 10000,
+      "opts": {
+        "seed": 1229
+      },
+      "maxSize": 0.1,
+      "numSegments": 10
+    },
+    {
+      "readerType": "genPolygon",
+      "distribution": "uniform",
+      "cardinality": 10000,
+      "opts": {
+        "seed": 1229
+      },
+      "maxSize": 0.1,
+      "numSegments": 10
+    }
+  ],
+  "joinParam": {
+    "joinType": "twoWayJoin",
+    "opts": {
+      "sjworkload": "32m",
+      "partitioner": "grid",
+      "quadsplitthreshold": 1000,
+      "quadsplitmethod": "index",
+      "filtermethod": "rtree"
+    },
+    "predicate": "Intersects"
+  }
+}

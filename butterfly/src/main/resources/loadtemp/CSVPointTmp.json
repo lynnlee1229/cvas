@@ -1,0 +1,14 @@
+{
+  "master": "local[*]",
+  "appName": "MyApp",
+  "rdds": [
+    {
+      "readerType": "csvpoint",
+      "path": "hdfs://localhost:9000/butterfly/testin/shenzhen_trajP.csv",
+      "xColumn": 2,
+      "yColumn": 3,
+      "delimiter": ",",
+      "skipHeader": false
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "master": "local[*]",
+  "appName": "LanduseExp",
+  "parallelism": 64,
+  "inFatherPath": "hdfs://localhost:9000",
+  "outFatherPath": "hdfs://localhost:9000",
+  "outPath": "/butterfly/testout",
+  "rdds": [
+    {
+      "readerType": "wkt",
+      "relativePath": "/butterfly/testin/landuse_metric_with_geom.csv",
+      "wktColumn": 0,
+      "delimiter": ",",
+      "skipHeader": true
+    },
+    {
+      "readerType": "wkt",
+      "relativePath": "/butterfly/testin/行政边界_市级.csv",
+      "wktColumn": 0,
+      "delimiter": ",",
+      "skipHeader": true
+    }
+  ],
+  "joinParam": {
+    "joinType": "twoWayJoin",
+    "opts": {
+      "sjworkload": "64m",
+      "pbsmpartitioner": "rsgrove",
+      "quadsplitthreshold": 1000,
+      "quadsplitmethod": "split",
+      "filtermethod": "planesweep",
+      "ignoreComplexThreshold": 200000,
+      "numPartitions": 32
+    },
+    "predicate": "Intersects"
+  },
+  "partitionParam": {
+    "partitionType": "grid",
+    "opts": {
+    }
+  }
+}

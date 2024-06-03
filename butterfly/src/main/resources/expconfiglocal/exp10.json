@@ -1,0 +1,39 @@
+{
+  "master": "local[*]",
+  "appName": "ParallelExp",
+  "parallelism": 64,
+  "outFatherPath": "hdfs://localhost:9000",
+  "outPath": "/butterfly/testout",
+  "rdds": [
+    {
+      "readerType": "genPoint",
+      "distribution": "uniform",
+      "cardinality": 100000000,
+      "opts": {
+        "seed": 1229
+      }
+    },
+    {
+      "readerType": "genPolygon",
+      "distribution": "uniform",
+      "cardinality": 1000,
+      "opts": {
+        "seed": 1229
+      },
+      "maxSize": 0.1,
+      "numSegments": 10
+    }
+  ],
+  "joinParam": {
+    "joinType": "twoWayJoin",
+    "opts": {
+      "sjworkload": "16m",
+      "partitioner": "grid",
+      "quadsplitthreshold": 1000,
+      "quadsplitmethod": "index",
+      "filtermethod": "planesweep"
+    },
+    "algorithm": "bj",
+    "predicate": "Intersects"
+  }
+}

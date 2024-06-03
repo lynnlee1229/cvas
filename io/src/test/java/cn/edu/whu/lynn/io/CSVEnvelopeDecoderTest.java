@@ -1,0 +1,24 @@
+package cn.edu.whu.lynn.io;
+
+import cn.edu.whu.lynn.geolite.EnvelopeND;
+import cn.edu.whu.lynn.io.CSVEnvelopeDecoder;
+import junit.framework.TestCase;
+import org.locationtech.jts.geom.GeometryFactory;
+
+
+public class CSVEnvelopeDecoderTest extends TestCase {
+
+  public void testParse3D() {
+    EnvelopeND expected = new EnvelopeND(new GeometryFactory(), 3, 0.0, 1.2, 3.4, 15.3, 13.4, 17.7);
+    String str = "0.0,1.2,3.4,15.3,13.4,17.7";
+    EnvelopeND actual = CSVEnvelopeDecoder.instance.apply(str, null);
+    assertEquals(expected, actual);
+  }
+
+  public void testReuseEnvelopes() {
+    EnvelopeND expected = new EnvelopeND(new GeometryFactory(), 3, 0.0, 1.2, 3.4, 15.3, 13.4, 17.7);
+    String str = "0.0,1.2,3.4,15.3,13.4,17.7";
+    EnvelopeND actual = CSVEnvelopeDecoder.instance.apply(str, new EnvelopeND(new GeometryFactory(), 2));
+    assertEquals(expected, actual);
+  }
+}

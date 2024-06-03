@@ -1,0 +1,38 @@
+{
+  "master": "yarn",
+  "appName": "CardinalityExp",
+  "parallelism": 64,
+  "outFatherPath": "hdfs://u0:9000",
+  "outPath": "/butterfly/testout",
+  "rdds": [
+    {
+      "readerType": "genPoint",
+      "distribution": "uniform",
+      "cardinality": 100000,
+      "opts": {
+        "seed": 1229
+      }
+    },
+    {
+      "readerType": "genPoint",
+      "distribution": "uniform",
+      "cardinality": 1000,
+      "opts": {
+        "seed": 1229
+      },
+      "maxSize": 0.1,
+      "numSegments": 10
+    }
+  ],
+  "joinParam": {
+    "joinType": "twoWayJoin",
+    "opts": {
+      "sjworkload": "32m",
+      "pbsmpartitioner": "grid",
+      "quadsplitthreshold": 1000,
+      "quadsplitmethod": "index",
+      "filtermethod": "planesweep"
+    },
+    "predicate": "Intersects"
+  }
+}

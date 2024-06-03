@@ -1,0 +1,40 @@
+{
+  "master": "local[*]",
+  "appName": "TDriveExp",
+  "parallelism": 64,
+  "inFatherPath": "hdfs://localhost:9000",
+  "outFatherPath": "hdfs://localhost:9000",
+  "outPath": "/butterfly/testout",
+  "rdds": [
+    {
+      "readerType": "csvpoint",
+      "relativePath": "/butterfly/testin/tdrive.csv",
+      "xColumn": 2,
+      "yColumn": 3,
+      "delimiter": ",",
+      "skipHeader": false
+    },
+    {
+      "readerType": "csvpoint",
+      "relativePath": "/butterfly/testin/tdrive.csv",
+      "xColumn": 2,
+      "yColumn": 3,
+      "delimiter": ",",
+      "skipHeader": false
+    }
+  ],
+  "joinParam": {
+    "joinType": "twoWayJoinsd",
+    "opts": {
+      "sjworkload": "64m",
+      "pbsmpartitioner": "grid",
+      "filtermethod": "planesweep"
+    },
+    "predicate": "Intersects"
+  },
+  "partitionParam": {
+    "partitionType": "grid",
+    "opts": {
+    }
+  }
+}

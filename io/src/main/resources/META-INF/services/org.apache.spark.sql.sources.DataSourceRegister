@@ -1,0 +1,6 @@
+cn.edu.whu.lynn.io.geojsonv2.GeoJSONSourcev2
+cn.edu.whu.lynn.io.shapefilev2.ShapefileDataSourcev2
+cn.edu.whu.lynn.io.RTreeSource
+cn.edu.whu.lynn.io.gpxv2.GPXSource
+cn.edu.whu.lynn.io.kmlv2.KMLSourcev2
+cn.edu.whu.lynn.io.kmlv2.KMZSourcev2

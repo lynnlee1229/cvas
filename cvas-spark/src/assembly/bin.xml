@@ -1,0 +1,63 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
+  <id>bin</id>
+  <formats>
+    <format>dir</format>
+    <format>tar.gz</format>
+    <format>zip</format>
+  </formats>
+  <baseDirectory>
+    cvas-${version}
+  </baseDirectory>
+  <fileSets>
+    <fileSet>
+      <outputDirectory>bin/</outputDirectory>
+      <directory>src/bin</directory>
+      <fileMode>755</fileMode>
+      <filtered>true</filtered>
+    </fileSet>
+  </fileSets>
+<!--  <files>-->
+<!--    <file>-->
+<!--      <outputDirectory></outputDirectory>-->
+<!--      <source>../README.md</source>-->
+<!--    </file>-->
+<!--    <file>-->
+<!--      <outputDirectory></outputDirectory>-->
+<!--      <source>../LICENSE</source>-->
+<!--    </file>-->
+<!--  </files>-->
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory>lib</outputDirectory>
+      <includes>
+        <include>cn.edu.whu.lynn:jhdf</include>
+        <include>javax.media:jai_core</include>
+      </includes>
+    </dependencySet>
+  </dependencySets>
+  <moduleSets>
+    <moduleSet>
+
+      <!-- Enable access to all projects in the current multimodule build! -->
+      <useAllReactorProjects>true</useAllReactorProjects>
+
+      <!-- Now, select which projects to include in this module-set. -->
+      <includes>
+        <include>cn.edu.whu.lynn:common</include>
+        <include>cn.edu.whu.lynn:core</include>
+        <include>cn.edu.whu.lynn:io</include>
+        <include>cn.edu.whu.lynn:raptor</include>
+        <include>cn.edu.whu.lynn:visualization</include>
+        <include>cn.edu.whu.lynn:cvas-spark</include>
+      </includes>
+
+      <binaries>
+        <includeDependencies>false</includeDependencies>
+        <outputDirectory>lib</outputDirectory>
+        <unpack>false</unpack>
+      </binaries>
+    </moduleSet>
+  </moduleSets>
+</assembly>
