@@ -1,8 +1,8 @@
 package butterfly.core.spatialIndex.index;
 
 import butterfly.core.utils.distance.DistanceCalculator;
-import edu.ucr.cs.bdlab.beast.geolite.EnvelopeNDLite;
-import edu.ucr.cs.bdlab.beast.geolite.IFeature;
+import cn.edu.whu.lynn.geolite.EnvelopeNDLite;
+import cn.edu.whu.lynn.geolite.IFeature;
 import org.locationtech.jts.geom.Geometry;
 
 import java.util.List;

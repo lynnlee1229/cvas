@@ -1,10 +1,10 @@
 package butterfly.core.spatialPartitioner;
 
-import edu.ucr.cs.bdlab.beast.core.SpatialPartitioner;
-import edu.ucr.cs.bdlab.beast.geolite.EnvelopeNDLite;
-import edu.ucr.cs.bdlab.beast.synopses.AbstractHistogram;
-import edu.ucr.cs.bdlab.beast.synopses.Summary;
-import edu.ucr.cs.bdlab.beast.util.IntArray;
+import cn.edu.whu.lynn.core.SpatialPartitioner;
+import cn.edu.whu.lynn.geolite.EnvelopeNDLite;
+import cn.edu.whu.lynn.synopses.AbstractHistogram;
+import cn.edu.whu.lynn.synopses.Summary;
+import cn.edu.whu.lynn.util.IntArray;
 
 import java.io.IOException;
 import java.io.ObjectInput;

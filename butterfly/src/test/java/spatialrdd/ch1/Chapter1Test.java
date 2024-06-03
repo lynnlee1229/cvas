@@ -1,6 +1,7 @@
 package spatialrdd.ch1;
 
 import butterfly.core.common.CaseVectorRDD;
+import butterfly.core.enums.Distribution;
 import butterfly.core.spatialPartitioner.SizeFunctions;
 import butterfly.core.spatialrdd.ButterflySparkContext;
 import butterfly.core.spatialrdd.VectorRDD;
@@ -26,17 +27,18 @@ import java.util.List;
 public class Chapter1Test implements Serializable {
 
     public final String OUT_PATH = "outs/ch1/";
-    public JavaSpatialSparkContext jsc;
-
-    {
-        if (jsc != null) {
-            jsc.close();
-        }
-        jsc = new JavaSpatialSparkContext("local[*]", "chapter1Test");
-    }
+//    public JavaSpatialSparkContext jsc;
+//
+//    {
+//        if (jsc != null) {
+//            jsc.close();
+//        }
+//        jsc = new JavaSpatialSparkContext("local[*]", "chapter1Test");
+//    }
 
     @Test
     public void IOTest() {
+        JavaSpatialSparkContext jsc = new JavaSpatialSparkContext("local[*]", "chapter1Test");
         ButterflySparkContext bsc = new ButterflySparkContext(jsc);
 //        ButterflySparkContext bsc = SparkUtils.createButterflySparkContext("local[*]", "chapter1Test");
         final String path = "hdfs://localhost:9000/butterfly/testout/shenzhen_landuse.csv";
@@ -49,7 +51,9 @@ public class Chapter1Test implements Serializable {
      */
     @Test
     public void partitionTest1() {
-        VectorRDD<Geometry> polygonDataGen10K = CaseVectorRDD.getPolygonDataGen10K();
+        JavaSpatialSparkContext jsc = new JavaSpatialSparkContext("local[*]", "chapter1Test");
+        VectorRDD<Geometry> polygonDataGen10K = new VectorRDD<>(jsc);
+        polygonDataGen10K.fromPointGenerator(10000, Distribution.GAUSSIAN, 4, new ButterflyOptions());
         polygonDataGen10K.doPartition2(GridPartitioner.class, "size", 20000, f ->
                         f.getGeometry().getNumPoints()
                 , new ButterflyOptions());
@@ -59,8 +63,6 @@ public class Chapter1Test implements Serializable {
         List<Tuple2<Integer, Summary>> collect = polygonDataGen10K.partitionSummary().collect();
         collect.forEach(t -> System.out.println(t._1 + " " + t._2));
         System.out.println(summary);
-
-        int bp = -1;
     }
 
 

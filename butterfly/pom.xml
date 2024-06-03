@@ -251,7 +251,7 @@
             <version>1.23</version>
         </dependency>
         <dependency>
-            <groupId>edu.ucr.cs.bdlab</groupId>
+            <groupId>cn.edu.whu.lynn</groupId>
             <artifactId>core</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
@@ -265,7 +265,7 @@
         <dependency>
             <groupId>cn.edu.whu.lynn</groupId>
             <artifactId>visualization</artifactId>
-            <version>lynn-0.1.0</version>
+            <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
