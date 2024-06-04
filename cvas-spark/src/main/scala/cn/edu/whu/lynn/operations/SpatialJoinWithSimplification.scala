@@ -1461,12 +1461,11 @@ the quad split algorithm to speedup the spatial join
     val numWorkUnits: Int = (totalSize / opts.getSizeAsBytes(JoinWorkloadUnit, "32m")).toInt max sc.defaultParallelism max 1
     val numStrips: Int = numWorkUnits * opts.getInt(PBSMMultiplier, 200)
     val partitioner = new GridPartitioner(synopsis1.summary, Array(1, numStrips))
-    //    val rPartitioned = if (r.isSpatiallyPartitioned && r.getSpatialPartitioner.isDisjoint) r
-    //    else r.spatialPartition(classOf[GridPartitioner], numStrips, "disjoint" -> true)
     val rPartitioned: RDD[(Int, IFeature)] = IndexHelper._assignFeaturesToPartitions(r, partitioner)
     rPartitioned.map(
       idFeatures => {
         val features = idFeatures._2
+        // 只是缓冲区生成，不dissolve的话直接用JTS的buffer效果要好一些
         Feature.create(features, features.getGeometry.buffer(bufferSize))
       }
     )

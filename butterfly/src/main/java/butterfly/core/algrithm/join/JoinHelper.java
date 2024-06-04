@@ -30,19 +30,16 @@ public class JoinHelper implements Serializable {
 
     public static JavaPairRDD<IFeature, IFeature> spatialJoin(JavaRDD<IFeature> driverRDD, ButterflyOptions opts, JavaRDD<IFeature> drivenRDD, SJPredicate predicate, SJAlgorithm joinMethod) {
         // 二路空间连接
-        // TODO 丰富空间连接算法
         return spatialJoin(driverRDD, opts, drivenRDD, predicate, joinMethod, null);
     }
 
     public static JavaPairRDD<IFeature, IFeature> spatialJoin(JavaRDD<IFeature> driverRDD, ButterflyOptions opts, JavaRDD<IFeature> drivenRDD, SJPredicate predicate, SJAlgorithm joinMethod, LongAccumulator mbrCount) {
         // 二路空间连接
-        // TODO 丰富空间连接算法
         return SpatialJoinWithSimplification.spatialJoin(driverRDD, drivenRDD, predicate, joinMethod, mbrCount, opts);
     }
 
     public static JavaPairRDD<IFeature, IFeature> spatialJoinWithMetric(JavaRDD<IFeature> driverRDD, ButterflyOptions opts, JavaRDD<IFeature> drivenRDD, SJPredicate predicate, SJAlgorithm joinMethod, MetricsAccumulator metricsAccumulator) {
         // 二路空间连接
-        // TODO 丰富空间连接算法
         return SpatialJoinWithSimplification.spatialJoinWithMetric(driverRDD, drivenRDD, predicate, joinMethod, metricsAccumulator, opts);
     }
 

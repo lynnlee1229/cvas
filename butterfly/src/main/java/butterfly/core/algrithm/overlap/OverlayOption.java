@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author Lynn Lee
  * @date 2024/1/15
  **/
-public enum OverlapOption implements Serializable {
+public enum OverlayOption implements Serializable {
     /**
      * 交集
      */
@@ -24,8 +24,8 @@ public enum OverlapOption implements Serializable {
      */
     SYMMETRIC_DIFFERENCE;
 
-    public static OverlapOption getOverlapOption(String str) {
-        for (OverlapOption me : OverlapOption.values()) {
+    public static OverlayOption getOverlapOption(String str) {
+        for (OverlayOption me : OverlayOption.values()) {
             if (me.name().equalsIgnoreCase(str)) {
                 return me;
             }
